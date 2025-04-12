@@ -1,0 +1,332 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+{% load static %}
+{% block content %}
+
+<style>
+  :root {
+    /* Color Scheme */
+    --primary: #2c5f2d;
+    --secondary: #97BC62;
+    --accent: #FFE77A;
+    --dark: #2c3e50;
+    --light: #f8f9fa;
+    --text: #4a4a4a;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Base Styles */
+  .about-container {
+    margin-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  /* Notification Section */
+  .notification-section {
+    padding: 2rem 0;
+    background: linear-gradient(135deg, var(--light) 0%, #f1f8e9 100%);
+  }
+
+  .notification-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+
+  .notification-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .notification-ribbon {
+    position: absolute;
+    top: 15px;
+    left: -30px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.5rem 2rem;
+    font-weight: 700;
+    transform: rotate(-45deg);
+    font-size: 0.9rem;
+    z-index: 1;
+  }
+
+  .notification-image {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+  }
+
+  .notification-content {
+    padding: 2rem;
+  }
+
+  /* Main Content Styles */
+  .section-header {
+    text-align: center;
+    margin: 4rem 0;
+  }
+
+  .section-title {
+    font-size: 2.8rem;
+    color: var(--dark);
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--secondary);
+    border-radius: 2px;
+  }
+
+  .history-image {
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+  }
+
+  /* Staff Section */
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .staff-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+  }
+
+  .staff-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .staff-image {
+    height: 280px;
+    object-fit: cover;
+    width: 100%;
+    border-bottom: 4px solid var(--secondary);
+  }
+
+  .staff-info {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  /* Core Values */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .value-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    border-left: 5px solid var(--primary);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+
+  .value-card:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .about-container {
+      margin-top: 90px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+    }
+
+    .notification-image {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.8rem;
+    }
+
+    .staff-image {
+      height: 240px;
+    }
+
+    .notification-content {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .about-container {
+      margin-top: 70px;
+    }
+
+    .section-title::after {
+      width: 60px;
+      bottom: -10px;
+    }
+
+    .notification-ribbon {
+      left: -35px;
+      padding: 0.4rem 1.8rem;
+    }
+  }
+</style>
+
+<div class="about-container">
+  <!-- Notification Section -->
+  <section class="notification-section animate-fade-in">
+    <div class="container">
+      <h2 class="section-title mb-5">Latest Updates</h2>
+      
+      {% if is_multiple %}
+        {% for n in notification %}
+        <div class="notification-card mb-4">
+          <div class="notification-ribbon">New</div>
+          <div class="row g-0">
+            <div class="col-lg-4">
+              <img src="{{ n.notify_img.url }}" 
+                   class="notification-image w-100 h-100" 
+                   alt="{{ n.name }}">
+            </div>
+            <div class="col-lg-8">
+              <div class="notification-content">
+                <h3 class="mb-3 text-primary">{{ n.name }}</h3>
+                <p class="lead text-muted">{{ n.description }}</p>
+                <div class="mt-4 text-secondary">
+                  <small>
+                    <i class="far fa-calendar-alt me-2"></i>
+                    {{ n.date_posted|date:"F j, Y" }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      
+      {% else %}
+      <div class="notification-card">
+        <div class="notification-ribbon">New</div>
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <img src="{{ notification.notify_img.url }}" 
+                 class="notification-image w-100 h-100" 
+                 alt="{{ notification.name }}">
+          </div>
+          <div class="col-lg-8">
+            <div class="notification-content">
+              <h2 class="mb-4 text-primary">{{ notification.name }}</h2>
+              <p class="lead text-muted">{{ notification.description }}</p>
+              <div class="mt-4 text-secondary">
+                <small>
+                  <i class="far fa-calendar-alt me-2"></i>
+                  {{ notification.date_posted|date:"F j, Y" }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section class="history-section py-5">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Journey</h2>
+      </div>
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <img src="{{ history.image.url }}" 
+               class="history-image img-fluid" 
+               alt="School History">
+        </div>
+        <div class="col-lg-6">
+          <div class="px-lg-4">
+            <h3 class="mb-4 text-dark">Building the Future Since {{ history.year_founded }}</h3>
+            <p class="lead text-muted">{{ history.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Staff Section -->
+  <section class="staff-section py-5 bg-light">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Meet Our Team</h2>
+      </div>
+      <div class="staff-grid">
+        {% for staff in staff_members %}
+        <div class="staff-card">
+          <img src="{{ staff.image.url }}" 
+               class="staff-image" 
+               alt="{{ staff.name }}">
+          <div class="staff-info">
+            <h4 class="mb-2">{{ staff.name }}</h4>
+            <h6 class="text-secondary mb-3">{{ staff.designation }}</h6>
+            <p class="text-muted small">{{ staff.bio }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values Section -->
+  <section class="values-section py-5">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Core Values</h2>
+      </div>
+      <div class="values-grid">
+        {% for value in core_values %}
+        <div class="value-card">
+          <h5 class="text-primary mb-3">{{ value.value_name }}</h5>
+          <p class="text-muted mb-0">{{ value.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

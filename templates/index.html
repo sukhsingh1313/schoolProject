@@ -1,0 +1,542 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+		/* Notification Section */
+		.notification_section {
+			background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+			padding: 2rem 0;
+			border-bottom: 3px solid #ff9800;
+			
+		}
+	
+		.notification-item {
+			position: relative;
+			background: white;
+			border-radius: 15px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+			margin: 1.5rem 0;
+			padding: 1.5rem;
+			transition: transform 0.3s ease;
+		}
+	
+		.notification-item:hover {
+			transform: translateY(-5px);
+		}
+	
+		.ribbon {
+			position: absolute;
+			top: 15px;
+			left: -15px;
+			padding: 0.5rem 2rem;
+			color: white;
+			font-weight: 600;
+			font-size: 0.9rem;
+			text-transform: uppercase;
+			background: linear-gradient(45deg, #ff9800, #ff5722);
+			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+			clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%, 10% 50%);
+			z-index: 1;
+		}
+	
+		.close-btn {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			cursor: pointer;
+			color: #666;
+			font-size: 1.5rem;
+			transition: color 0.3s ease;
+		}
+	
+		.close-btn:hover {
+			color: #ff0000;
+		}
+	
+		/* Events Section */
+		.events {
+			padding: 4rem 0;
+			background: #f8f9fa;
+		}
+	
+		.event_items {
+			margin-top: 2rem;
+		}
+	
+		.event_item {
+			background: white;
+			border-radius: 12px;
+			margin-bottom: 2rem;
+			padding: 1.5rem;
+			box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease;
+		}
+	
+		.event_item:hover {
+			transform: translateY(-3px);
+		}
+	
+		.event_date {
+			background: #673ab7;
+			color: white;
+			border-radius: 8px;
+			padding: 1rem;
+			text-align: center;
+		}
+	
+		.event_day {
+			font-size: 2rem;
+			font-weight: 700;
+			line-height: 1;
+		}
+	
+		.event_month {
+			font-size: 1.2rem;
+			text-transform: uppercase;
+		}
+	
+		.event_content {
+			padding: 0 1.5rem;
+		}
+	
+		/* News Section */
+		.news_post {
+			background: white;
+			border-radius: 12px;
+			margin-bottom: 2rem;
+			overflow: hidden;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+		}
+	
+		.news_post_image img {
+			width: 100%;
+			height: 300px;
+			object-fit: cover;
+			transition: transform 0.3s ease;
+		}
+	
+		.news_post:hover .news_post_image img {
+			transform: scale(1.05);
+		}
+	
+		.news_post_top {
+			padding: 1.5rem;
+			border-bottom: 2px solid #eee;
+		}
+	
+		.news_post_date {
+			background: #673ab7;
+			color: white;
+			border-radius: 8px;
+			padding: 1rem;
+			width: 80px;
+		}
+	
+		.pagination {
+			display: flex;
+			justify-content: center;
+			margin: 2rem 0;
+		}
+	
+		.page-item {
+			margin: 0 0.5rem;
+		}
+	
+		.page-link {
+			padding: 0.5rem 1rem;
+			border-radius: 5px;
+			border: 1px solid #ddd;
+			transition: all 0.3s ease;
+		}
+	
+		.page-link:hover {
+			background: #673ab7;
+			color: white;
+			border-color: #673ab7;
+		}
+	
+		/* Responsive Design */
+		@media (max-width: 768px) {
+			.notification-item .row {
+				flex-direction: column;
+			}
+			
+			.notification-item img {
+				margin-bottom: 1.5rem;
+			}
+			
+			.event_item .row {
+				flex-direction: column-reverse;
+			}
+			
+			.event_image {
+				margin-bottom: 1.5rem;
+			}
+			
+			.news_post_image img {
+				height: 200px;
+			}
+		}
+	
+		@media (max-width: 576px) {
+			.ribbon {
+				left: -10px;
+				padding: 0.3rem 1.5rem;
+				font-size: 0.8rem;
+			}
+			
+			.event_date {
+				margin-bottom: 1rem;
+			}
+		}
+
+	.ribbon {
+		width: 60px;
+		font-size: 14px;
+		padding: 4px;
+		position: absolute;
+		left : -30px;
+		top: -12px;
+		text-align: center;
+		border-radius: 25px;
+		opacity: 60%;
+		transform: rotate(-20deg);
+		background-color: #ff9800;
+		color: white;
+	  }
+	  .ribbon:hover{
+		opacity: 100%;
+	  }
+</style>
+<!-- Notification Section -->
+
+<!-- Home -->
+<div class="home "style="margin-top:150px;">
+	<!-- Hero Slider -->
+	<div class="hero_slider_container" >
+	  <div class="hero_slider owl-carousel">
+		{% for slide in slides %}
+		<!-- Hero Slide -->
+		<div class="hero_slide">
+			{% if slide.video %}
+			<!-- Video Background -->
+			<video class="hero_slide_background" autoplay muted loop>
+				<source src="{{ slide.video.url }}" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			{% else %}
+			<div class="hero_slide_background" style="background-image:url({{ slide.image.url }})"></div>
+			{% endif %}	
+		  <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+			<div class="hero_slide_content text-center "  >
+			  <h1 data-animation-in="fadeInUp" class="p-2 pr-3" style=" background-color: rgba(102, 64, 173, 0.5); border-radius: 30px; "  data-animation-out="animate-out fadeOut">{{ slide.titlefirst }} {% if slide.highlightwords %} <span style="border-radius: 30px;">{{slide.highlightwords}}</span>{% endif %} {% if slide.titlesecond %} {{slide.titlesecond}} {% endif %}</h1>
+			</div>
+		  </div>
+		</div>
+		{% endfor %}
+	  </div>
+	  <div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200">prev</span></div>
+	  <div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200">next</span></div>
+	</div>
+  </div>
+
+
+  
+<!-- Notification Section -->
+<div class="notification_section d-flex justify-content-center" style="background: rgb(240, 219, 180); padding: 20px 0;">
+    {% for notify in notification %}
+    <div class="container notification-item" data-notify-id="{{ notify.id }}">
+        <div class="row align-items-center">
+            <!-- Notification Image -->
+            <div class="col-lg-4">
+                <span class="ribbon">new</span>
+                <img src="{{ notify.notify_img.url }}" alt="Notification" style="max-width: 80%; border-radius: 8px;">
+            </div>
+            <!-- Notification Text -->
+            <div class="col-lg-8">
+                <div class="notification_content">
+                    <h2 style="color: #333;">Important Notification</h2>
+                    <h3 style="color: gray;">{{ notify.name }}</h3>
+                    <p style="color: #555;">
+                        {{ notify.description|truncatewords:20 }}
+                    </p>
+                    <a {% if notify.url %} href="{{ notify.url }}" {% else %} href="{% url 'about_view' notify.slug %}" {% endif %}
+                        class="btn btn-primary" style="background-color: #007bff; border: none; padding: 15px 20px; border-radius: 5px;">Learn More </a>
+                </div>
+            </div>
+            <!-- Close Button -->
+            <div class="close-btn" style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #999;">&times;</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="events page_section">
+  <div class="container">
+  <div class="row">
+				<div class="col">
+					<div class="section_title text-center">
+						<h1>Upcoming Events</h1>
+					</div>
+				</div>
+			</div>
+			
+			<div class="event_items">
+				{% for event in event_model %}
+				<!-- Event Item -->
+				<div class="row event_item">
+					<div class="col">
+						<div class="row d-flex flex-row align-items-end">
+
+							<div class="col-lg-2 order-lg-1 order-2">
+								<div class="event_date d-flex flex-column align-items-center justify-content-center">
+									<div class="event_day">{{event.event_day}}</div>
+									<div class="event_month">{{event.event_month}}</div>
+								</div>
+							</div>
+
+							<div class="col-lg-6 order-lg-2 order-3">
+								<div class="event_content">
+									<div class="event_name"><a class="trans_200" {% if event.event_link %} href="{{event.event_link}}" {% else %} style="color:rgb(112, 179, 250);font-size:46px;" {% endif %}>{{event.name}}</a></div>
+									<div class="event_location">{{event.event_location}}</div>
+									<p>{{event.description}}</p>
+								</div>
+							</div>
+
+							<div class="col-lg-4 order-lg-3 order-1">
+								<div class="event_image">
+									<img style="" src="{{event.image.url}}" alt="image upload error">
+								</div>
+							</div>
+
+						</div>	
+					</div>
+				</div>
+				{% endfor %}
+
+				<!-- Event Item -->
+				
+	
+    
+				
+
+			</div>
+				
+		</div>
+	</div>
+
+	{% comment %} news section  {% endcomment %}
+	<div class="home">
+		<div class="home_background_container prlx_parent">
+			<div class="home_background prlx" style="background-image:url(images/news_background.jpg)"></div>
+		</div>
+		<div class="home_content">
+			<h1>The News</h1>
+		</div>
+	</div>
+	<div class="news">
+		<div class="container">
+			<div class="row">
+				
+				<!-- News Column -->
+
+				<div class="col-lg-8">
+					
+					<div class="news_posts">
+						{% for news in page_obj %}
+						<!-- News Post -->
+						<div class="news_post">
+							<div class="news_post_image">
+								<img src="{{news.news_image.url}}" alt="News image">
+							</div>
+							<div class="news_post_top d-flex flex-column flex-sm-row">
+								<div class="news_post_date_container">
+									<div class="news_post_date d-flex flex-column align-items-center justify-content-center">
+										<div>{{news.news_day}}</div>
+										<div class="text-center">{{news.news_month}}</div>
+
+									</div>
+								</div>
+								<div class="news_post_title_container">
+									<div class="news_post_title">
+										<a {% if news.url %}href="{{news.url}}" {% else %} href="{% url "NewsView" news.slug %}"{% endif %} >{{news.news_title}}</a>
+									</div>
+									<div class="news_post_meta">
+										<span class="news_post_author"><a >{{news.post_author}}</a></span>
+										<span>|</span>
+										<span class="news_post_comments"><a href="#comment_session">{{news_session.comments.count}}</a></span>
+									</div>
+								</div>
+							</div>
+							<div class="news_post_text">
+								<p>{{news.short_post_text| truncatewords:20}}</p>
+							</div>
+							<div class="news_post_button text-center trans_200">
+								<a href="{% url "NewsView" news.slug%}">Read More</a>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+
+					<!-- Page Nav -->
+
+					<div class="news_page_nav">
+						
+						<ul>
+							{% if page_obj.has_previous %}
+						
+							<li class="active text-center trans_200"><a href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+							{% endif %}
+							{% for num in page_obj.paginator.page_range %}
+							<li class="{% if num == page_obj.number %}active{% endif %}  text-center trans_200"><a href="/">{{num}}</a></li>
+							{% endfor %}
+							
+							{% if page_obj.has_next %}
+							<li class="text-center trans_200"><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+							{% endif %}
+						</ul>
+					</div>
+
+				</div>
+
+				<!-- Sidebar Column -->
+
+				<div class="col-lg-4">
+					<div class="sidebar">
+
+						<!-- Archives -->
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">
+								<h3>Archives</h3>
+							</div>
+							<ul class="sidebar_list">
+								<li class="sidebar_list_item"><a href="#">Design Courses</a></li>
+								<li class="sidebar_list_item"><a href="#">All you need to know</a></li>
+								<li class="sidebar_list_item"><a href="#">Uncategorized</a></li>
+								<li class="sidebar_list_item"><a href="#">About Our Departments</a></li>
+								<li class="sidebar_list_item"><a href="#">Choose the right course</a></li>
+							</ul>
+						</div>
+
+						<!-- Latest Posts -->
+
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">
+								<h3>Latest posts</h3>
+							</div>
+							
+							<div class="latest_posts">
+								
+								<!-- Latest Post -->
+								<div class="latest_post">
+									<div class="latest_post_image">
+										<img src="{% static "images/latest_1.jpg" %} " alt="">
+									</div>
+									<div class="latest_post_title"><a href="news_post.html">Why do you need a qualification?</a></div>
+									<div class="latest_post_meta">
+										<span class="latest_post_author"><a href="#">By Christian Smith</a></span>
+										<span>|</span>
+										<span class="latest_post_comments"><a href="#">3 Comments</a></span>
+									</div>
+								</div>
+
+								<!-- Latest Post -->
+								<div class="latest_post">
+									<div class="latest_post_image">
+										<img src="{% static "images/latest_2.jpg" %}" alt="">
+									</div>
+									<div class="latest_post_title"><a href="news_post.html">Why do you need a qualification?</a></div>
+									<div class="latest_post_meta">
+										<span class="latest_post_author"><a href="#">By Christian Smith</a></span>
+										<span>|</span>
+										<span class="latest_post_comments"><a href="#">3 Comments</a></span>
+									</div>
+								</div>
+
+								<!-- Latest Post -->
+								<div class="latest_post">
+									<div class="latest_post_image">
+										<img src="{% static "images/latest_3.jpg" %}" alt="">
+									</div>
+									<div class="latest_post_title"><a href="news_post.html">Why do you need a qualification?</a></div>
+									<div class="latest_post_meta">
+										<span class="latest_post_author"><a href="#">By Christian Smith</a></span>
+										<span>|</span>
+										<span class="latest_post_comments"><a href="#">3 Comments</a></span>
+									</div>
+								</div>
+								
+							</div>
+								
+						</div>
+
+						<!-- Tags -->
+
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">
+								<h3>Tags</h3>
+							</div>
+							<div class="tags d-flex flex-row flex-wrap">
+								<div class="tag"><a href="#">Course</a></div>
+								<div class="tag"><a href="#">Design</a></div>
+								<div class="tag"><a href="#">FAQ</a></div>
+								<div class="tag"><a href="#">Teachers</a></div>
+								<div class="tag"><a href="#">School</a></div>
+								<div class="tag"><a href="#">Graduate</a></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			// Close button functionality
+			const closeButtons = document.querySelectorAll('.close-btn');
+			
+			closeButtons.forEach(function(button) {
+				button.addEventListener('click', function() {
+					const notificationItem = this.closest('.notification-item');
+					notificationItem.style.display = 'none';  // Hide the notification
+					
+					// Optional: Send a request to the server to remove the notification from the session or database
+					const notifyId = notificationItem.getAttribute('data-notify-id');
+					
+					// Send AJAX request to remove notification if required
+					fetch(`/remove-notification/${notifyId}/`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-CSRFToken': '{{ csrf_token }}'  // CSRF token for security
+						},
+						body: JSON.stringify({ id: notifyId })
+					})
+					.then(response => response.json())
+					.then(data => {
+						console.log('Notification removed:', data);
+					})
+					.catch(error => {
+						console.error('Error removing notification:', error);
+					});
+				});
+			});
+		});
+
+		$(".hero_slider").owlCarousel({
+			items: 1,
+			loop: true,
+			autoplay: true,
+			nav: true,
+			animateIn: "fadeIn",
+			animateOut: "fadeOut",
+		  });
+	</script>
+	
+
+
+  {% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="margin-top: 200px;">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="csv_file" required>
+    <button type="submit">Upload</button>
+</form>
+</div>
+{% endblock %}S

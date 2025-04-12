@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Your existing result template here -->
+    <div class="text-center mt-4">
+        <a href="{% url 'result_pdf' result.roll_no %}" class="btn btn-success">
+            <i class="fas fa-download me-2"></i>Download PDF
+        </a>
+    </div>
+</div>
+{% endblock %}

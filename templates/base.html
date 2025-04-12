@@ -1,0 +1,769 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BrightFuture</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Course Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static "images/icon.png" %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}"> {% endcomment %}
+    <link href="{% static 'style/bootstrap4/bootstrap.min.css' %}" rel="stylesheet">
+    {% comment %} <link href="{% static 'style/bootstrap4/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
+    <link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static "styles/news_styles.css" %} ">
+    <link rel="stylesheet" type="text/css" href="{% static "styles/news_post_styles.css" %} ">
+    <link rel="stylesheet" type="text/css" href="{% static "styles/news_responsive.css" %} ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "styles/accounts.css" %}">
+</head>
+<body>
+    
+<style>
+    /* ===== Global Improvements ===== */
+    body {
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       color: #333;
+       line-height: 1.6;
+   }
+   
+   .super_container {
+       overflow-x: hidden;
+   }
+   
+   /* ===== Header & Navigation ===== */
+   .header {
+       background: #ffffff;
+       box-shadow: 0 2px 15px rgba(7, 4, 4, 0.1);
+       padding: 1px 0;
+       
+   }
+   
+   .logo_container {
+       transition: transform 0.3s ease;
+   }
+   
+   .logo_container:hover {
+       transform: scale(1.05);
+   }
+   
+   .logo_container img {
+       border: 2px solid #673ab7 !important;
+       transition: all 0.3s ease;
+   }
+   
+   .logo_container span {
+       color: #673ab7;
+       font-weight: 700;
+       font-size: 1.2rem;
+       letter-spacing: -0.5px;
+   }
+   
+   /* Main Navigation */
+   .main_nav_list {
+       gap: 1.5rem;
+   }
+   
+   .main_nav_item > a {
+       color: #555 !important;
+       font-weight: 500;
+       position: relative;
+       transition: all 0.3s ease;
+   }
+   
+   .main_nav_item > a:hover {
+       color: #673ab7 !important;
+       transform: translateY(-2px);
+   }
+   
+   .main_nav_item > a::after {
+       content: '';
+       position: absolute;
+       width: 0;
+       height: 2px;
+       bottom: -5px;
+       left: 0;
+       background-color: #673ab7;
+       transition: width 0.3s ease;
+   }
+   
+   .main_nav_item > a:hover::after {
+       width: 100%;
+   }
+   
+   /* ===== Dropdown Styles ===== */
+   .dropdown-menu {
+       display: block;
+       opacity: 0;
+       visibility: hidden;
+       transition: all 0.3s ease;
+       margin-top: 0.5rem !important;
+       min-width: 200px;
+   }
+   
+   .dropdown:hover > .dropdown-menu,
+   .dropdown-menu:hover {
+       opacity: 1;
+       visibility: visible;
+       transform: translateY(0);
+   }
+   
+   /* Nested Dropdown */
+   .dropdown-menu .dropdown-menu {
+       left: 100%;
+       top: -10px;
+       margin-left: 0.1rem;
+   }
+   
+   /* Mobile View */
+   @media (max-width: 991px) {
+       .dropdown-menu {
+           display: none;
+           opacity: 1;
+           visibility: visible;
+           position: static;
+           float: none;
+           width: auto;
+           margin-top: 0;
+           box-shadow: none;
+       }
+       
+       .dropdown-menu.show {
+           display: block;
+       }
+       
+       .dropdown-menu .dropdown-menu {
+           left: 0;
+           position: relative;
+       }
+   }
+   
+   /* Mobile Menu */
+   .custom-menu {
+       background: #ffffff !important;
+       box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+   }
+   
+   .menu_item.menu_mm > a {
+       color: #444 !important;
+       padding: 1rem !important;
+       border-bottom: 1px solid #eee;
+   }
+   
+     
+   /* ===== Footer Enhancements ===== */
+   .footer {
+       background: #2c2c2c;
+       color: #ffffff;
+       padding: 3rem 0 0;
+   }
+   
+   .footer_about_text {
+       color: #aaa;
+       font-size: 0.95rem;
+   }
+   
+   .footer_column_title {
+       font-size: 1.1rem;
+       font-weight: 600;
+       margin-bottom: 1.5rem;
+       color: #fff;
+   }
+   
+   .footer_list_item a {
+       color: #aaa !important;
+       padding: 0.3rem 0 !important;
+       transition: all 0.3s ease;
+   }
+   
+   .footer_list_item a:hover {
+       color: #673ab7 !important;
+       padding-left: 0.5rem !important;
+   }
+   
+   .footer_contact_item {
+       display: flex;
+       align-items: center;
+       gap: 0.8rem;
+       margin-bottom: 1rem;
+   }
+   
+   .footer_contact_icon img {
+       filter: invert(1);
+       width: 20px;
+   }
+   
+   /* Newsletter Form */
+   .newsletter_form_container {
+       max-width: 600px;
+   }
+   
+   .newsletter_email {
+       border: 2px solid #673ab7 !important;
+       border-radius: 25px !important;
+       padding: 0.8rem 1.5rem !important;
+       margin-right: 1rem !important;
+   }
+   
+   .newsletter_submit_btn {
+       background: #673ab7 !important;
+       border-radius: 25px !important;
+       padding: 0.8rem 2rem !important;
+       transition: all 0.3s ease;
+   }
+   
+   .newsletter_submit_btn:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 5px 15px rgba(103, 58, 183, 0.4);
+   }
+   
+   /* ===== Animations ===== */
+   @keyframes slideDown {
+       from {
+           opacity: 0;
+           transform: translateY(-10px);
+       }
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+   
+   /* ===== Responsive Design ===== */
+   @media (max-width: 992px) {
+       .main_nav_list {
+           gap: 1rem;
+       }
+   
+       .header_side span {
+           display: none;
+       }
+   }
+   
+   @media (max-width: 768px) {
+       .logo_container span {
+           font-size: 1rem;
+       }
+   
+       .footer_content {
+           text-align: center;
+       }
+   
+       .footer_contact_item {
+           justify-content: center;
+       }
+   }
+   
+   @media (max-width: 576px) {
+       .newsletter_form {
+           flex-direction: column;
+           gap: 1rem;
+       }
+   
+       .newsletter_email {
+           margin-right: 0 !important;
+           width: 100%;
+       }
+   }
+   
+   /* Fixed dropdown styles */
+   .dropdown-submenu {
+       position: relative;
+   }
+   
+   .dropdown-submenu > .dropdown-menu {
+       top: 0;
+       left: 100%;
+       margin-top: -6px;
+       margin-left: -1px;
+   }
+   
+   .dropdown-submenu:hover > .dropdown-menu {
+       display: block;
+       opacity: 1;
+       visibility: visible;
+   }
+   
+   /* Caret styles */
+   .dropdown-submenu > a:after {
+       display: block;
+       content: " ";
+       float: right;
+       width: 0;
+       height: 0;
+       border-color: transparent;
+       border-style: solid;
+       border-width: 5px 0 5px 5px;
+       border-left-color: #ccc;
+       margin-top: 5px;
+       margin-right: -10px;
+   }
+   
+   /* Mobile adjustments */
+   @media (max-width: 991px) {
+       .dropdown-submenu > .dropdown-menu {
+           position: relative;
+           left: 0;
+           margin-left: 20px;
+       }
+       
+       .dropdown-submenu > a:after {
+           transform: rotate(90deg);
+       }
+   }
+</style>
+<div class="super_container">
+
+    <!-- Header -->
+    <header class="header d-flex flex-row ">
+        <div class="header_content d-flex flex-row align-items-center">
+            <!-- Logo -->
+            <div class="logo_container ">
+                <div class="">
+                    <img style="max-width: 60px; border:solid 1px; margin-left: 10px; border-radius: 20px;"  src="{% static 'images/logo.png' %}" alt="logo"><br>
+                   <span style="font-weight: 900;">BrightFuture</span>
+                </div>
+            </div>
+
+          <!-- Main Navigation -->
+<nav class="main_nav_container">
+    <div class="main_nav">
+        <ul class="main_nav_list">
+            <!-- Regular Items -->
+            <li class="main_nav_item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="main_nav_item"><a href="{% url 'about_view' %}">About Us</a></li>
+            <li class="main_nav_item"><a href="{% url 'academic_view' %}">Academic</a></li>
+            
+            <!-- Admissions Dropdown -->
+            <li class="main_nav_item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Admissions
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'admission_view' %}">Admission Guidelines</a></li>
+                    <li><a class="dropdown-item" href="{% url 'online_applications' %}">Online Application Forms</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Important Dates</a></li>
+                </ul>
+            </li>
+            
+            <li class="main_nav_item"><a href="contact.html">Contact</a></li>
+            
+            {% if user.is_authenticated %}
+            <!-- Show admin links only to staff -->
+            {% if user.is_staff %}
+            <li class="main_nav_item">
+                <a href="{% url 'admin:index' %}" class="nav-link">
+                    <i class="bi bi-speedometer2 me-1"></i> Admin Panel
+                </a>
+            </li>
+            <li class="main_nav_item">
+                <!-- Change in template -->
+                <a href="{% url 'upload_results' %}" class="nav-link">
+                    <i class="bi bi-file-earmark-spreadsheet"></i> Upload Results
+                </a>
+            </li>
+            {% endif %}
+            
+            <!-- Student profile check -->
+            {% if request.user.student_profile.roll_no %}
+            <li class="main_nav_item">
+                <a class="nav-link" href="{% url 'result_detail' request.user.student_profile.roll_no %}">
+                    <i class="fas fa-graduation-cap"></i> My Result
+                </a>
+            </li>
+            {% else %}
+            <li class="main_nav_item">
+                <a class="nav-link disabled" href="#">
+                    <i class="fas fa-graduation-cap"></i> My Result (Pending Roll No)
+                </a>
+            </li>
+            {% endif %}
+         
+            <!-- Show student-specific links -->
+            {% if user.groups.all.0.name == 'Student' %}
+            <li class="main_nav_item">
+                <a href="{% url 'result_search' %}" class="nav-link">
+                    <i class="bi bi-file-text me-1"></i> My Result
+                </a>
+            </li>
+            {% endif %}
+                
+            <!-- Common authenticated user link -->
+            <li class="main_nav_item">
+                <a href="{% url 'logout_view' %}" class="nav-link">
+                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                </a>
+            </li>
+            {% else %}
+            <!-- Updated Register/Login dropdown with proper Bootstrap 5 structure -->
+            <li class="main_nav_item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Register / Login
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- Student section -->
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Student
+                        </a>
+                        <ul class="dropdown-menu dropdown-submenu">
+                            <li><a class="dropdown-item" href="{% url 'student_login_view' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register_student' %}">Register</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Teacher section -->
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Teacher
+                        </a>
+                        <ul class="dropdown-menu dropdown-submenu">
+                            <li><a class="dropdown-item" href="#">Login</a></li>
+                            <li><a class="dropdown-item" href="#">Register</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+            
+        </div>
+        <div class="header_side d-flex flex-row justify-content-center align-items-center">
+            <img src="{% static 'images/phone-call.svg' %}" alt="">
+            <span>+91 97XXX-83X9X</span>
+        </div>
+
+        <!-- Hamburger -->
+        <div class="hamburger_container">
+            <i class="fas fa-bars trans_200"></i>
+        </div>
+    </header>
+    
+    <!-- Menu -->
+    <div class="menu_container menu_mm custom-menu">
+        <div class="menu_close_container">
+            <div class="menu_close"></div>
+        </div>
+        <div class="menu_inner menu_mm">
+            <div class="menu menu_mm">
+                <ul class="menu_list menu_mm">
+                    <li class="menu_item menu_mm"><a href="{% url "home" %}">Home</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'about_view' %}">About us</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url "academic_view" %}">Academic</a></li>
+                    <li class="menu_item menu_mm dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admissions
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url "admission_view" %}">Admission Guidelines</a></li>
+                          <li><a class="dropdown-item" href="{% url "online_applications" %}">Online Application Forms</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Important Dates</a></li>
+                        </ul>
+                    </li>
+                      
+                    <li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+                   
+                    <!-- Fixed Mobile Menu Registration/Login Dropdown -->
+                    {% if user.is_authenticated %}
+                    <!-- Show admin links only to staff -->
+                    {% if user.is_staff %}
+                    <li class="menu_item menu_mm">
+                        <a href="{% url 'admin:index' %}" class="nav-link">
+                            <i class="bi bi-speedometer2 me-1"></i> Admin Panel
+                        </a>
+                    </li>
+                    <li class="menu_item menu_mm">
+                        <a href="{% url 'upload_results' %}" class="nav-link">
+                            <i class="bi bi-file-earmark-spreadsheet"></i> Upload Results
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Student-specific links -->
+                    {% if user.groups.all.0.name == 'Student' %}
+                    <li class="menu_item menu_mm">
+                        <a href="{% url 'result_search' %}" class="nav-link">
+                            <i class="bi bi-file-text me-1"></i> My Result
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <li class="menu_item menu_mm">
+                        <a href="{% url 'logout_view' %}" class="nav-link">
+                            <i class="bi bi-box-arrow-right me-1"></i> Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="menu_item menu_mm dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Register / Login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'student_login_view' %}">Login</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'register_student' %}">Register</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Teacher</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                    <li><a class="dropdown-item" href="#">Register</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="menu_social_container menu_mm">
+                    <ul class="menu_social menu_mm">
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <div class="menu_copyright menu_mm">CodeXsukh All rights reserved</div>
+            </div>
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="newsletter">
+                <div class="row">
+                    <div class="col">
+                        <div class="section_title text-center">
+                            <h1>Subscribe to newsletter</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="newsletter_form_container mx-auto">
+                            <form action="post">
+                                <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-center">
+                                    <input id="newsletter_email" class="newsletter_email" type="email" placeholder="Email Address" required="required">
+                                    <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300">Subscribe</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_content">
+                <div class="row">
+                    <div class="col-lg-3 footer_col">
+                        <div class="logo_container">
+                            <div class="logo">
+                                <img style="max-width: 80% ;border:solid 1px; border-radius: 15px 50px;"  src="{% static 'images/logo.png' %}" alt="">
+                                <span>BrightFuture</span>
+                            </div>
+                        </div>
+                        <p class="footer_about_text">In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum, tempor lacus.</p>
+                    </div>
+                    <div class="col-lg-3 footer_col">
+                        <div class="footer_column_title">Menu</div>
+                        <div class="footer_column_content">
+                            <ul>
+                                <li class="footer_list_item"><a href="#">Home</a></li>
+                                <li class="footer_list_item"><a href="#">About Us</a></li>
+                                <li class="footer_list_item"><a href="courses.html">Courses</a></li>
+                                <li class="footer_list_item"><a href="news.html">News</a></li>
+                                <li class="footer_list_item"><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 footer_col">
+                        <div class="footer_column_title">Usefull Links</div>
+                        <div class="footer_column_content">
+                            <ul>
+                                <li class="footer_list_item"><a href="#">Testimonials</a></li>
+                                <li class="footer_list_item"><a href="#">FAQ</a></li>
+                                <li class="footer_list_item"><a href="#">Community</a></li>
+                                <li class="footer_list_item"><a href="#">Campus Pictures</a></li>
+                                <li class="footer_list_item"><a href="#">Tuitions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 footer_col">
+                        <div class="footer_column_title">Contact</div>
+                        <div class="footer_column_content">
+                            <ul>
+                                <li class="footer_contact_item">
+                                    <div class="footer_contact_icon">
+                                        <img src="{% static 'images/placeholder.svg' %}" alt="">
+                                    </div>
+                                    hanumangarh,(raj.),india
+                                </li>
+                                <li class="footer_contact_item">
+                                    <div class="footer_contact_icon">
+                                        <img src="{% static 'images/smartphone.svg' %}" alt="">
+                                    </div>
+                                   97XXX83XXX
+                                </li>
+                                <li class="footer_contact_item">
+                                    <div class="footer_contact_icon">
+                                        <img src="{% static 'images/envelope.svg' %}" alt="">
+                                    </div>
+                                    codersukh@gmail.com
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_bar d-flex flex-column flex-sm-row align-items-center">
+                <div class="footer_copyright">
+                    <span>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart"></i> by <a href="https://sukhsingh1313.pythonanywhere.com" target="_blank">CodeXsukh</a></span>
+                </div>
+                <div class="footer_social ml-sm-auto">
+                    <ul class="menu_social">
+                        <li class="menu_social_item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                        <li class="menu_social_item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li class="menu_social_item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="menu_social_item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="menu_social_item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'js/news_post_custom.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+<script>
+// Enhanced dropdown functionality for both desktop and mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to initialize nested dropdowns
+    function initDropdowns() {
+        // Handle main dropdown toggles
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const parent = this.closest('.dropdown, .dropdown-submenu');
+                const menu = parent.querySelector('.dropdown-menu');
+                
+                // Toggle the clicked dropdown
+                parent.classList.toggle('show');
+                if (menu) {
+                    menu.classList.toggle('show');
+                }
+                
+                // On mobile, close other dropdowns at the same level
+                if (window.innerWidth <= 991) {
+                    const siblings = Array.from(parent.parentNode.children)
+                        .filter(el => el !== parent && (el.classList.contains('dropdown') || el.classList.contains('dropdown-submenu')));
+                    
+                    siblings.forEach(sibling => {
+                        sibling.classList.remove('show');
+                        const siblingMenu = sibling.querySelector('.dropdown-menu');
+                        if (siblingMenu) siblingMenu.classList.remove('show');
+                    });
+                }
+            });
+        });
+        
+        // Desktop hover behavior for dropdowns
+        if (window.innerWidth > 991) {
+            const dropdowns = document.querySelectorAll('.dropdown, .dropdown-submenu');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('mouseenter', function() {
+                    this.classList.add('show');
+                    const menu = this.querySelector('.dropdown-menu');
+                    if (menu) menu.classList.add('show');
+                });
+                
+                dropdown.addEventListener('mouseleave', function() {
+                    this.classList.remove('show');
+                    const menu = this.querySelector('.dropdown-menu');
+                    if (menu) menu.classList.remove('show');
+                });
+            });
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown, .dropdown-submenu')) {
+                document.querySelectorAll('.dropdown, .dropdown-submenu').forEach(dropdown => {
+                    dropdown.classList.remove('show');
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    if (menu) menu.classList.remove('show');
+                });
+            }
+        });
+    }
+    
+    // Initialize dropdowns
+    initDropdowns();
+    
+    // Reinitialize on window resize to handle mobile/desktop transitions
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            // Clean up existing dropdown classes
+            document.querySelectorAll('.dropdown, .dropdown-submenu').forEach(dropdown => {
+                dropdown.classList.remove('show');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                if (menu) menu.classList.remove('show');
+            });
+            
+            // Reinitialize with proper behavior for current viewport
+            initDropdowns();
+        }, 250);
+    });
+    
+    // Special handling for mobile menu
+    const hamburger = document.querySelector('.hamburger_container');
+    const mobileMenu = document.querySelector('.menu_container');
+    const menuClose = document.querySelector('.menu_close');
+    
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+        });
+    }
+    
+    if (menuClose && mobileMenu) {
+        menuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+        });
+    }
+});
+</script>

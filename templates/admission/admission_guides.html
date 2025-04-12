@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Admission Guidelines{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div class="container p-4 mb-5" style="margin-top: 200px;-webkit-box-shadow: 0px 0px 8px 0px rgba(247,195,99,0.96); 
+box-shadow: 0px 0px 8px 0px rgba(247,195,99,0.96);">
+    <div class="section_title text-center mb-4">
+        <h1>Guidelines</h1>
+        <p class="text-muted">Important information for parents and students</p>
+    </div>
+
+    <!-- Section 1: School Guidelines -->
+    <div class="guideline-section p-4 border rounded mb-4" style="background-color: #f9f9f9;">
+        <h2 class="section-subtitle mb-3">1. School Guidelines</h2>
+        {% for school_guide  in school_guidelines %}
+        <ul class="list-unstyled pl-3">
+            <li class="mb-2"><i class="fas fa-check-circle text-success"></i> <strong>{{school_guide.title}}:</strong>{{school_guide.description}} </li>
+         
+        </ul>
+     {% endfor %}
+    </div>
+
+    <!-- Section 2: Admission Guidelines -->
+    <div class="guideline-section p-4 border rounded" style="background-color: #f1f7fc;">
+        <h2 class="section-subtitle mb-3">2. Admission Guidelines</h2>
+            {% for admission_guide in admission_guidelines %}
+        <ol class="pl-3">
+            <li class="mb-2"><strong>{{admission_guide.title}}:</strong> {{admission_guide.description}}</li>
+            
+                {% if admission_guide.documents_required %}
+                <ul>
+                    <li>{{admission_guide.documents_required}}</li>
+                   
+                </ul>
+                
+                {% endif %}
+            </li>
+            
+        </ol>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .section_title h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .guideline-section {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .section-subtitle {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #0056b3;
+    }
+    .list-unstyled li, .pl-3 li {
+        font-size: 1rem;
+        color: #444;
+    }
+    .list-unstyled li i {
+        margin-right: 8px;
+    }
+</style>
+
+{% endblock %}

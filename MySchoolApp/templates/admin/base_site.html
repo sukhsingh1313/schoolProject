@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}My Custom Admin{% endblock %}
+
+{% block branding %}
+<h1>Bright Future School Admin</h1>
+{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+{% endblock %}

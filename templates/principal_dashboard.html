@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<h2>Principal Dashboard</h2>
+<p>Welcome, Principal! Here is your dashboard.</p>
+
+<h3>Your Permissions:</h3>
+<ul>
+    {% for permission in permissions %}
+        <li>{{ permission }}</li>
+    {% empty %}
+        <li>You have no permissions assigned.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

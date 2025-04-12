@@ -1,0 +1,63 @@
+<!-- templates/upload.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">CSV फाइल से रिजल्ट अपलोड करें</h2>
+    <!-- Messages Section -->
+{% if messages %}
+<div class="alert-container">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+    
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label">CSV फाइल चुनें</label>
+                    <input type="file" name="csv_file" class="form-control" accept=".csv" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-upload me-2"></i>अपलोड करें
+                </button>
+            </form>
+        </div>
+    </div>
+
+    {% if errors %}
+    <div class="mt-4 card border-danger">
+        <div class="card-header bg-danger text-white">त्रुटि विवरण</div>
+        <div class="card-body">
+            <ul class="list-unstyled">
+                {% for error in errors %}
+                <li class="text-danger mb-2">• {{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="mt-4 alert alert-info">
+        <h5>CSV फॉर्मेट निर्देश:</h5>
+        <ul>
+            <li>फाइल CSV फॉर्मेट में होनी चाहिए</li>
+            <li>कॉलम इस क्रम में हों:
+                <code>roll_no,name,father_name,mother_name,year_sem,exam_month,exam_year,subject_details</code>
+            </li>
+            <li><strong>subject_details</strong> कॉलम JSON फॉर्मेट में होना चाहिए:
+                <pre>{"MCA101": {"marks": 85, "grade": "A"}, "MCA102": {"marks": 78, "grade": "B+"}}</pre>
+            </li>
+            <li>एक्साम्पल CSV फाइल: <a href="/sample.csv" download>डाउनलोड करें</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

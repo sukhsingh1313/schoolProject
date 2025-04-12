@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Time Table{% endblock %}
+{% load static %}
+
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .timetable-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .teacher {
+        color: #007bff;
+    }
+
+    .subject {
+        font-weight: bold;
+    }
+
+    .start-time, .end-time {
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            font-size: 14px;
+        }
+        th, td {
+            padding: 10px;
+        }
+    }
+</style>
+<div class="container-fluid" style="margin-top: 200px">
+<h2 class="timetable-title">Timetable for {{ class_obj.name }} - {{ class_obj.section }}</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Day</th>
+            <th>Subject</th>
+            <th>Teacher</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in timetable_entries %}
+        <tr>
+            <td>{{ entry.day_of_week }}</td>
+            <td class="subject">{{ entry.subject }}</td>
+            <td class="teacher">{{ entry.teacher }}</td>
+            <td class="start-time">{{ entry.start_time }}</td>
+            <td class="end-time">{{ entry.end_time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

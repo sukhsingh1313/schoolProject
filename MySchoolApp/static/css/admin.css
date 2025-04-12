@@ -1,0 +1,25 @@
+/* admin.css */
+
+body {
+    background-color: #f4f6f9;
+}
+
+#header {
+    background-color: #001f3f;
+    color: white;
+    padding: 10px;
+}
+
+h1 {
+    color: #0074D9;
+    text-align: center;
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.module {
+    border: 1px solid #0074D9;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}

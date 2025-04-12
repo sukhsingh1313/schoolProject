@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container p-5 "  style="margin-top: 200px;">
+    <div class="text-center mb-4">
+        <h4 class="fw-bold">SHRI KHUSHAL DAS UNIVERSITY RESULTS</h4>
+        <h6 class="fw-bold">MASTER OF COMPUTER APPLICATION</h6>
+    </div>
+    <div class="row mb-3 border-1">
+        <div class="col-md-6">
+            <p><strong>Name:</strong> {{ result.name }}</p>
+            <p><strong>Father's Name:</strong> {{ result.father_name }}</p>
+            <p><strong>Mother's Name:</strong> {{ result.mother_name }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Year/Sem:</strong> {{ result.year_sem }}</p>
+            <p><strong>Exam Held:</strong> {{ result.exam_month }}, {{ result.exam_year }}</p>
+            {% comment %} <p><strong>Exam Type:</strong> {{ result.exam_type }}</p> {% endcomment %}
+            <p><strong>Enrollment No:</strong> {{ result.roll_no }}</p>
+        </div>
+        
+    </div>
+    <div class="row mb-3">
+        
+    </div>
+    <h5 class="fw-bold text-center">Subjects</h5>
+    <table class="table table-bordered text-center mt-2">
+        <thead class="">
+            <tr>
+                <th>Subject Code</th>
+                <th>Maximum Marks</th>
+                <th>Obtained Marks</th>
+                <th>Grade</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for code, details in result.subject_details.items %}
+            <tr>
+                <td>{{ code }}</td>
+                <td>100</td> <!-- Static Maximum Marks -->
+                <td>{{ details.marks }}</td>
+                <td>{{ details.grade }}</td>
+                <td>Pass</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p><strong>Marks Obtained:</strong> {{ result.marks_obtained }}</p>
+            <p><strong>SGPA:</strong> {{ result.percentage }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Result:</strong> {{ result.result_status }}</p>
+        </div>
+    </div>
+    <div class="text-center mt-5">
+        <p class="small"><strong>Controller of Examinations</strong></p>
+        <p>Shri Khushal Das University, Hanumangarh</p>
+    </div>
+</div>
+{% endblock %}
