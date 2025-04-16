@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-lb3^zyvo@nihj9v-bgh4+!riukz-1-qkn(eik+nos0peghi7$y'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 DEBUG = False 
 # Application definition
@@ -76,19 +76,19 @@ WSGI_APPLICATION = 'schoolProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 import dj_database_url
 
 # Database configuration
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('postgresql://brightfuture_databse_user:hAGj0I4STY6lJpuv8u7VrBS0JyPK7KqF@dpg-cvtbdrp5pdvs739knpvg-a.oregon-postgres.render.com/brightfuture_databse'))
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('postgresql://brightfuture_databse_user:hAGj0I4STY6lJpuv8u7VrBS0JyPK7KqF@dpg-cvtbdrp5pdvs739knpvg-a.oregon-postgres.render.com/brightfuture_databse'))
+# }
 AUTH_PROFILE_MODULE = 'MySchoolApp.StudentProfile'
 
 # Password validation
