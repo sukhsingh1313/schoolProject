@@ -1,1 +1,1 @@
-web: gunicorn schoolProject.wsgi:application --workers 4
+gunicorn myproject.wsgi:application
