@@ -195,7 +195,7 @@ class Class(models.Model):
     section = models.CharField(max_length=10,blank=True,null=True) #example : 'A',"B"
 
     def __str__(self):
-        return f"{self.name} - {self.section if self.section else "" }"
+        return f"{self.name} - {self.section if self.section else '' }"
     
 
 class Subject(models.Model):
