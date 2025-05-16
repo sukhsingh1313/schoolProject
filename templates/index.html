@@ -252,7 +252,7 @@
             <!-- Notification Image -->
             <div class="col-lg-4">
                 <span class="ribbon">new</span>
-                <img src="{{ notify.notify_img.url }}" alt="Notification" style="max-width: 80%; border-radius: 8px;">
+                <img src="{{ notify.notify_img.url }}" alt="{{ notify.name }}" style="max-width: 80%; border-radius: 8px;">
             </div>
             <!-- Notification Text -->
             <div class="col-lg-8">
@@ -391,7 +391,7 @@
 							<li class="active text-center trans_200"><a href="?page={{page_obj.previous_page_number}}">Previous</a></li>
 							{% endif %}
 							{% for num in page_obj.paginator.page_range %}
-							<li class="{% if num == page_obj.number %}active{% endif %}  text-center trans_200"><a href="/">{{num}}</a></li>
+							<li class="{% if num == page_obj.number %}active{% endif %}  text-center trans_200"><a href="?page={{num}}">{{num}}</a></li>
 							{% endfor %}
 							
 							{% if page_obj.has_next %}
