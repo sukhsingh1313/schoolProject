@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'Enrollment',
     'Accounts',
     'Results',
+     'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +133,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dtkngdlq4',
+    'API_KEY': '575855677421797',
+    'API_SECRET': 'GDLX1XzZXDmegCDpiTrQ1UHytmo',
+}
 
 
 MEDIA_URL = '/media/'
