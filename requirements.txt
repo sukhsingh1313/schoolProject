@@ -43,5 +43,6 @@ waitress==3.0.2
 webencodings==0.5.1
 whitenoise==6.9.0
 xhtml2pdf==0.2.17
-cloudinary django-cloudinary-storage
+cloudinary==1.37.0
+django-cloudinary-storage==0.3.0
 
